@@ -1,13 +1,26 @@
 import { getPostData, getAllPostSlugs } from '@/lib/posts'
 import PostContent from './PostContent'
 import { MDXRemote } from 'next-mdx-remote/rsc'
+import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
 
-export async function generateStaticParams() {
-  const paths = getAllPostSlugs()
-  return paths
+interface PageProps {
+  params: {
+    slug: string
+  }
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export default async function Post({ params }: { params: { slug: string } }) {
+export async function generateStaticParams() {
+  const paths = await getAllPostSlugs()
+  return paths.map((path) => ({
+    slug: path.params.slug,
+  }))
+}
+
+export default async function Post({
+  params,
+  searchParams,
+}: PageProps) {
   const postData = await getPostData(params.slug)
   
   return (

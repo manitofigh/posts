@@ -36,10 +36,26 @@ export default function Search({ allPosts }: SearchProps) {
   }, [])
 
   useEffect(() => {
-    let filteredPosts = allPosts.filter((post) =>
-      post.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      (selectedCategory === '' || post.category === selectedCategory)
-    )
+    let filteredPosts = allPosts.filter((post) => {
+      const searchLower = searchTerm.toLowerCase().trim()
+      const titleLower = post.title.toLowerCase()
+      const contentLower = post.content.toLowerCase()
+
+      // Split search term into words
+      const searchWords = searchLower.split(/\s+/).filter(word => word.length > 0)
+
+      // If no search term, just check category
+      if (searchWords.length === 0) {
+        return selectedCategory === '' || post.category === selectedCategory
+      }
+
+      // Check if all search words are found in either title or content
+      const allWordsFound = searchWords.every(word => 
+        titleLower.includes(word) || contentLower.includes(word)
+      )
+
+      return allWordsFound && (selectedCategory === '' || post.category === selectedCategory)
+    })
 
     // Sort posts by date
     filteredPosts.sort((a, b) => {
@@ -50,7 +66,6 @@ export default function Search({ allPosts }: SearchProps) {
 
     window.dispatchEvent(new CustomEvent('filterPosts', { detail: filteredPosts }))
   }, [searchTerm, selectedCategory, sortOrder, allPosts])
-
   return (
     <div className="flex space-x-4 items-center mb-8">
       <div className="flex-grow">
