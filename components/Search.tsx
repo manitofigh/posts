@@ -47,7 +47,7 @@ export default function Search({ allPosts }: SearchProps) {
       <div className="flex-grow">
         <input
           type="text"
-          placeholder="Search writings..."
+          placeholder="Search Writing Posts..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="w-full px-4 py-2 text-lg border-2 border-black dark:border-white focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500 bg-transparent font-fancy"
