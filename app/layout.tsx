@@ -11,13 +11,13 @@ const cormorantGaramond = Cormorant_Garamond({
 
 const aboreto = Aboreto({
   subsets: ['latin'],
-  weight: ['400'],
+  weight: '400',
   variable: '--font-aboreto',
 })
 
 export const metadata = {
   title: 'Mani Tofigh\'s Boring Writings',
-  description: 'Some stuff that I find and worthy of writing about, and you find boring.',
+  description: 'Some stuff that I find boring, and worthy of writing about.',
 }
 
 export default function RootLayout({
@@ -27,7 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${cormorantGaramond.variable} ${aboreto.variable} font-sans light`}>
+      <body suppressHydrationWarning className={`${cormorantGaramond.variable} ${aboreto.variable} font-sans antialiased`}>
         <Providers>
           <Header />
           <main className="container mx-auto px-4 py-8">{children}</main>
@@ -36,4 +36,3 @@ export default function RootLayout({
     </html>
   )
 }
-

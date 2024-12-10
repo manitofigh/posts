@@ -4,8 +4,9 @@
 
 :root {
   --foreground-rgb: 51, 51, 51;
-  /* Creamy ghost-white background */
-  --background-rgb: 248, 247, 245;
+  --background-rgb: 242, 237, 220;
+  /*247, 244, 233 */
+  /**/
 }
 
 .dark {
@@ -39,7 +40,29 @@ body {
 .prose {
   max-width: 65ch;
   font-family: var(--font-cormorant-garamond), serif;
-  font-size: 1.125rem;
+}
+
+/* Override default prose text size while keeping headings at their sizes */
+.prose p {
+  font-size: 1.4rem; /* or text-xl equivalent */
+  line-height: 1.75;
+}
+
+/* Make the lists match the paragraph size */
+.prose ul, .prose ol {
+  font-size: 1.4rem;
+  line-height: 1.75;
+}
+
+/* Keep blockquotes consistent */
+.prose blockquote {
+  font-size: 1.25rem;
+  line-height: 1.75;
+}
+
+/* Ensure inline code is readable */
+.prose code {
+  font-size: 0.9rem;
 }
 
 .sticky-header {

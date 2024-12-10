@@ -14,7 +14,7 @@ export default function Header() {
   }, [])
 
   return (
-    <header className="sticky-header border-b border-gray-200 dark:border-gray-700 py-6">
+    <header className="sticky-header border-b border-gray-400 dark:border-gray-700 py-6">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div>
           <Link href="/" className="text-3xl font-fancy">
@@ -28,7 +28,7 @@ export default function Header() {
           onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
           className="px-4 py-2 text-lg font-fancy border-t border-b border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors duration-300"
         >
-          {mounted ? (theme === 'dark' ? 'Light' : 'Dark') : 'Theme'}
+          {mounted ? (theme === 'dark' ? 'Toggle Light Mode' : 'Toggle Dark Mode') : 'Theme'}
         </button>
       </div>
     </header>

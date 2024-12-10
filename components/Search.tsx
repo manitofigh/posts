@@ -16,6 +16,7 @@ interface SearchProps {
 export default function Search({ allPosts }: SearchProps) {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
+  const [sortOrder, setSortOrder] = useState<'newest' | 'oldest'>('newest')
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
@@ -35,12 +36,20 @@ export default function Search({ allPosts }: SearchProps) {
   }, [])
 
   useEffect(() => {
-    const filteredPosts = allPosts.filter((post) =>
+    let filteredPosts = allPosts.filter((post) =>
       post.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
       (selectedCategory === '' || post.category === selectedCategory)
     )
+
+    // Sort posts by date
+    filteredPosts.sort((a, b) => {
+      const dateA = new Date(a.date).getTime()
+      const dateB = new Date(b.date).getTime()
+      return sortOrder === 'newest' ? dateB - dateA : dateA - dateB
+    })
+
     window.dispatchEvent(new CustomEvent('filterPosts', { detail: filteredPosts }))
-  }, [searchTerm, selectedCategory, allPosts])
+  }, [searchTerm, selectedCategory, sortOrder, allPosts])
 
   return (
     <div className="flex space-x-4 items-center mb-8">
@@ -53,6 +62,12 @@ export default function Search({ allPosts }: SearchProps) {
           className="w-full px-4 py-2 text-lg border-2 border-black dark:border-white focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500 bg-transparent font-fancy"
         />
       </div>
+      <button
+        onClick={() => setSortOrder(sortOrder === 'newest' ? 'oldest' : 'newest')}
+        className="px-4 py-2 text-lg border-2 border-black dark:border-white bg-transparent font-fancy whitespace-nowrap"
+      >
+        {sortOrder === 'newest' ? 'Newest First' : 'Oldest First'}
+      </button>
       <div className="relative" ref={dropdownRef}>
         <button
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -89,4 +104,3 @@ export default function Search({ allPosts }: SearchProps) {
     </div>
   )
 }
-

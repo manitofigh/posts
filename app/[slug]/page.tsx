@@ -11,7 +11,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
   const postData = await getPostData(params.slug)
   
   return (
-    <article className="prose prose-lg dark:prose-invert mx-auto">
+    <article className="prose dark:prose-invert mx-auto">
       <PostContent 
         title={postData.title}
         date={postData.date}
