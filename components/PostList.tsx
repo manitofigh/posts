@@ -2,6 +2,13 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { Cormorant_Garamond } from 'next/font/google'
+
+const cormorantGaramond = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  variable: '--font-cormorant-garamond',
+})
 
 interface Post {
   slug: string
@@ -42,7 +49,9 @@ export default function PostList({ initialPosts }: PostListProps) {
               <div className="p-6 space-y-4">
                 <h2 className="text-4xl font-bold font-fancy">{post.title}</h2>
                 <p className="text-sm text-gray-500 dark:text-gray-400">{post.date}</p>
-                <p className="line-clamp-3 font-cormorant-garamond">{post.content}</p>
+                <p className={`${cormorantGaramond.variable} font-serif line-clamp-3 text-xl leading-relaxed`}>
+                  {post.content}
+                </p>
                 <span className="inline-block px-3 py-1 text-sm font-fancy border-t border-b border-black dark:border-white">
                   {post.category}
                 </span>
@@ -54,4 +63,3 @@ export default function PostList({ initialPosts }: PostListProps) {
     </div>
   )
 }
-
