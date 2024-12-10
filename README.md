@@ -1,4 +1,4 @@
-# Minimalistic Writing Posts
+# Minimalistic Blog Posts
 
 A static blog site built with Next.js, featuring a minimalist old/classicy design and easy content management.
 
