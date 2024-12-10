@@ -3,19 +3,50 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --foreground-rgb: 51, 51, 51;
+  /* Creamy ghost-white background */
+  --background-rgb: 248, 247, 245;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --foreground-rgb: 255, 255, 255;
+  --background-rgb: 0, 0, 0;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+  font-family: var(--font-cormorant-garamond), serif;
+  font-weight: 400;
+  font-size: 1.125rem;
+}
+
+.font-fancy {
+  font-family: var(--font-aboreto), cursive;
+}
+
+@keyframes fillLine {
+  to {
+    width: 100%;
+  }
+}
+
+.group:hover .line-top,
+.group:hover .line-bottom {
+  animation: fillLine 0.3s ease-out forwards;
+}
+
+.prose {
+  max-width: 65ch;
+  font-family: var(--font-cormorant-garamond), serif;
+  font-size: 1.125rem;
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: rgb(var(--background-rgb));
+  backdrop-filter: blur(5px);
+  transition: background-color 0.3s ease;
 }

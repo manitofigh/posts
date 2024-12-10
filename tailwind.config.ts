@@ -6,13 +6,19 @@ export default {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: "rgb(var(--background-rgb))",
+        foreground: "rgb(var(--foreground-rgb))",
+      },
+      boxShadow: {
+        'lg': '0 10px 25px -3px rgba(0, 0, 0, 0.1)',
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),  // Add this if you haven't already
+  ],
 } satisfies Config;
