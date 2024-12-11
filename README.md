@@ -40,6 +40,7 @@ To generate the static site, run the following command:
 
 ```bash
 bun run build
+bun run serve # to see (serve) the built version
 ```
 
 This will create a `.next` folder with the static files. You can then serve these files using a static file server.
